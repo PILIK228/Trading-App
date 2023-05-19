@@ -8,7 +8,7 @@ from fastapi.staticfiles import StaticFiles
 
 from src.auth.base_config import auth_backend, fastapi_users
 from src.auth.schemas import UserRead, UserCreate
-
+from src.config import REDIS_HOST, REDIS_PORT
 from src.operations.router import router as router_operation
 from src.pages.router import router as router_pages
 from src.chat.router import router as router_chat
@@ -53,5 +53,5 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup_event():
-    redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
+    redis = aioredis.from_url(f"redis://{REDIS_HOST}:{REDIS_PORT}", encoding="utf8", decode_responses=True)
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
