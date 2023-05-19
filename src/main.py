@@ -12,6 +12,7 @@ from src.auth.schemas import UserRead, UserCreate
 from src.operations.router import router as router_operation
 from src.pages.router import router as router_pages
 from src.chat.router import router as router_chat
+from src.tasks.router import router as router_tasks
 
 app = FastAPI(
     title="Trading App"
@@ -34,6 +35,7 @@ app.include_router(
 app.include_router(router_operation)
 app.include_router(router_pages)
 app.include_router(router_chat)
+app.include_router(router_tasks)
 
 origins = [
     "http://localhost:3000",
